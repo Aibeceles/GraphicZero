@@ -1,0 +1,47 @@
+// Evaluate or view a quartet defined with GraphDBUpdateWithQuartetNodesScript 
+// Select i.MaxN = x the variable of quartet defined  at i.N = 2^(i.N), i.N>3.
+
+MATCH (i:IndexedBy)-[]->(e:Evaluate),(i:IndexedBy)-[:VertexIndexedBy]->(p:ProductArgsNode) where i.N='5' AND i.MaxN='100' AND i.Dimension="4"
+WITH i,e,p,i.N as iN, i.MaxN as iM
+MATCH (v:VertexNode) <- [p1:ProductRelationT] - (p) 
+WITH i,e,p,v,p1,iN,iM
+OPTIONAL MATCH  (p) - [p2:ProductRelationA] -> (vv:VertexNode)
+WITH i,e,p,v,p1,p2,vv,iN,iM,p.Divisor as pD
+WITH {Divisor:pD,afe:toInteger(p2.Eval),tft:toInteger(p1.T),DS: COLLECT( {  TDegree:CASE WHEN toInteger(v.Degree)=-1 THEN toInteger(v.Degree)+1 ELSE toInteger(v.Degree) END,
+                                      TScalar:CASE WHEN toInteger(v.Degree)=-1 THEN toFloat(v.Scalar)*2 ELSE toFloat(v.Scalar) END,
+                                      ATwoSeq:toInteger(p2.T),
+                                      ADegree:toInteger(vv.Degree),   
+                                      AScalar:CASE WHEN toInteger(vv.Degree)=-1 THEN toFloat(vv.Scalar)*2 ELSE toFloat(vv.Scalar) END })    }  AS argumentProduct,iN,iM,e
+
+WITH COLLECT(argumentProduct) as argumentProductt,argumentProduct.tft as aPafe,iN,iM,argumentProduct.Divisor as apD
+UNWIND RANGE(0,SIZE(argumentProductt)-1) as iii
+WITH argumentProductt[iii].DS as aPTds,aPafe,iN,iM,apD
+UNWIND aPTds as aPTdsU
+WITH CASE WHEN aPTdsU.AScalar IS null THEN                                         //  ProductArgsNode gets the division information.                 
+{DS:COLLECT({ResultScalar:(toFloat(aPTdsU.TScalar)*toInteger(aPafe)), 
+      ResultDegree:aPTdsU.TDegree,
+      ResultTwoSeq:aPTdsU.tft}),ET:aPafe,Divisor:apD}
+ELSE
+{DS:COLLECT({ResultScalar:(toFloat(aPTdsU.TScalar)*toFloat(aPTdsU.AScalar)*aPTdsU.ATwoSeq), 
+      ResultDegree: CASE WHEN aPTdsU.ADegree=-1 THEN aPTdsU.TDegree ELSE aPTdsU.ADegree+aPTdsU.TDegree END,
+      ResultTwoSeq:aPTdsU.ATwoSeq}),ET:aPafe,Divisor:apD}
+END
+AS resultProduct,iN,iM
+WITH COLLECT(resultProduct) as rPC,resultProduct.ET as eT,iN,iM,resultProduct.Divisor as rpD1
+UNWIND RANGE(0,SIZE(rPC)-1) as iI
+WITH rPC[iI].DS as rPCDS,eT,iN,iM,rpD1
+UNWIND rPCDS as rPCDSU
+WITH {RScalarList:COLLECT({RScalar:rPCDSU.ResultScalar}),RDegree:rPCDSU.ResultDegree,ET:eT,Divisor:rpD1} as resultMap,iN,iM
+
+WITH COLLECT(resultMap) as resultMapC,resultMap.ET as eTrm,resultMap.RDegree as rDRM,iN,iM,resultMap.Divisor as rpD2
+UNWIND RANGE(0,SIZE(resultMapC)-1) as iII
+WITH resultMapC[iII].RScalarList as rSL,eTrm,rDRM,iN,iM,rpD2
+UNWIND RANGE(0,SIZE(rSL)-1) as iIII
+UNWIND rSL[iIII] as rSLI
+WITH COLLECT(rSLI.RScalar) as cts,eTrm,rDRM,iN,iM,rpD2
+WITH REDUCE(tSum=0,ff IN cts | tSum +ff) As TotalRScalar,eTrm,rDRM,iN,iM,rpD2
+WITH TotalRScalar/rpD2 as TotalRScalaR,eTrm,rDRM,iN,iM
+// Return TotalRScalaR,toInteger(iM) as VariableX,toInteger(rDRM) as PDegree   //  uncomment to view individual terms of quartet.		
+WITH COLLECT(toInteger((TotalRScalaR*(toInteger(iM)^toInteger(rDRM)))))    as rSlt  
+WITH REDUCE(tSum=0,ff IN rSlt  | tSum +ff) As TotalrSlt
+RETURN TotalrSlt
