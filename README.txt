@@ -4,7 +4,7 @@ ProjectIntroductionVideo
 
 AbridgedMathsofQuadraticAddition.pdf is an abridged introduction to the math.
 
-Instance of Neo4j graph.db populated with TwoPolynomial092319.csv data.
+TwoPolynomial092319.csv data for populating graphdb.
 
 Four cypher script text files.  
 CreateDB loads the .csv.
@@ -12,5 +12,9 @@ Arithmetic will add two ^2 integers as pattern comprehension or otherwise return
 UpdateWithQuartetNodes will extend graphDB with available quartet polynomial comprenension.  
 ViewOfEvaluateQuartet inspects the new quartet.
 
+TwoPolynomialGeneratorJarZip contains Java Jar file.
+Run with two arguments:
+.FileName.csv
+.Index argument (An integer, the independent variable of a quadratic. So far, tested up to 1000).
 
 
