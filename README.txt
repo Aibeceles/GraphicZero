@@ -17,4 +17,4 @@ Run with two arguments:
 .FileName.csv
 .Index argument (An integer, the independent variable of a quadratic. So far, tested up to 1000).
 
-
+note.json is zeppelin note GraphicZero exibiting properties of project polynomials.
