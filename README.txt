@@ -18,3 +18,6 @@ Run with two arguments:
 .Index argument (An integer, the independent variable of a quadratic. So far, tested up to 1000).
 
 note.json is zeppelin note GraphicZero exibiting properties of project polynomials.
+note1.json is zeppelin note GraphicZero-TheQuadratics exibits output of the .jar file.
+
+Both can be viewed using the zepplin notbook viewer at zepl.com.
