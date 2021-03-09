@@ -24,3 +24,7 @@ Both can be viewed using the zepplin notbook viewer at zepl.com.
 
 Video of Differences Graph generator:
 https://www.youtube.com/watch?v=H4dBkofVA4A
+
+Link to encoding root sets as rational numbers.
+https://www.quora.com/How-are-rational-numbers-constructed-from-the-axioms-of-set-theory?q=how%20are%20the%20rationals%20constructed%20from%20the%20axioms%20of%20set
+
