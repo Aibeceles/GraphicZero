@@ -21,3 +21,6 @@ note.json is zeppelin note GraphicZero exibiting properties of project polynomia
 note1.json is zeppelin note GraphicZero-TheQuadratics exibits output of the .jar file.
 
 Both can be viewed using the zepplin notbook viewer at zepl.com.
+
+Video of Differences Graph generator:
+https://www.youtube.com/watch?v=H4dBkofVA4A
