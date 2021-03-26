@@ -1,4 +1,4 @@
-The GraphHack folder contains the following:
+The GraphicZero folder contains the following:
 
 ProjectIntroductionVideo
 
