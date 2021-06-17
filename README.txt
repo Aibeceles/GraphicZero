@@ -1,6 +1,7 @@
 The GraphicZero folder contains the following:
 
-ProjectIntroductionVideo
+ProjectIntroductionVideo:
+https://www.youtube.com/watch?v=FqSzCCxxdVY&t=9s
 
 AbridgedMathsofQuadraticAddition.pdf is an abridged introduction to the math.
 
