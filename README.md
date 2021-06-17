@@ -25,10 +25,14 @@ Run with two arguments:
 Zeppelin notbooks:
 
 GraphicFirstML.json           - Cypher scripts implementing Neo4j ML algorithms. 
+
 GraphicScrips.json            - Primary cypher scrips used for manipulating integer representing polynomials.
+
 GraphicZero.json              - Spark Scala notebook exibiting algebraic properties of generated polynomials.     
+
 GraphiZeroTheQuadratics.json  - Spark Scala notebook exibitiing properties of generated quadratics.
-KafkaStreamsTopics.json       - neo4j .conf scrips integrating kafka and neo4j
+
+KafkaStreamsTopics.json       - neo4j .conf scrips integrating kafka and neo4j.
 
 ZADScripts.jar            - Generate arbitrary degreed polynomial starting with generated quadratics (uses Kafka).
 ZeroAndDifferences.jar    - Implement Newton's difference algorithm along with jdbc methods for populating graphDB.
