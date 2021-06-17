@@ -22,11 +22,17 @@ Run with two arguments:
 
 ## Subsequent project work:
 
+Zeppelin notbooks:
 
-note.json is zeppelin note GraphicZero exibiting properties of project polynomials.
-note1.json is zeppelin note GraphicZero-TheQuadratics exibits output of the .jar file.
+GraphicFirstML.json           - Cypher scripts implementing Neo4j ML algorithms. 
+GraphicScrips.json            - Primary cypher scrips used for manipulating integer representing polynomials.
+GraphicZero.json              - Spark Scala notebook exibiting algebraic properties of generated polynomials.     
+GraphiZeroTheQuadratics.json  - Spark Scala notebook exibitiing properties of generated quadratics.
+KafkaStreamsTopics.json       - neo4j .conf scrips integrating kafka and neo4j
 
-Both can be viewed using the zepplin notbook viewer at zepl.com.
+ZADScripts.jar            - Generate arbitrary degreed polynomial starting with generated quadratics (uses Kafka).
+ZeroAndDifferences.jar    - Implement Newton's difference algorithm along with jdbc methods for populating graphDB.
+
 
 Video of Differences Graph generator:
 https://www.youtube.com/watch?v=H4dBkofVA4A
