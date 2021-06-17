@@ -35,6 +35,7 @@ GraphiZeroTheQuadratics.json  - Spark Scala notebook exibitiing properties of ge
 KafkaStreamsTopics.json       - neo4j .conf scrips integrating kafka and neo4j.
 
 ZADScripts.jar            - Generate arbitrary degreed polynomial starting with generated quadratics (uses Kafka).
+
 ZeroAndDifferences.jar    - Implement Newton's difference algorithm along with jdbc methods for populating graphDB.
 
 
