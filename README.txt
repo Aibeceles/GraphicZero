@@ -1,6 +1,6 @@
 The GraphicZero folder contains the following:
 
-## Origonal project 
+## Origonal project deliverable
 
 ProjectIntroductionVideo:
 https://www.youtube.com/watch?v=FqSzCCxxdVY&t=9s
