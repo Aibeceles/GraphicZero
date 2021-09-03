@@ -47,3 +47,11 @@ https://www.youtube.com/watch?v=H4dBkofVA4A
 
 Link to encoding root sets as rational numbers.
 https://www.quora.com/How-are-rational-numbers-constructed-from-the-axioms-of-set-theory?q=how%20are%20the%20rationals%20constructed%20from%20the%20axioms%20of%20set
+
+## Graph Machine learning:
+
+CubicNewtonDifferences.csv is dumped graph of ZerosAndDifferences.jar output for cubic 1^3 input.  
+
+The Zeppelin notebook GraphicDetermined implements neo4j gds.alpha.ml.nodeClassification algorithm for predicting determined polynomials represented on graph. 
+
+
