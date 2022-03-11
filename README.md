@@ -34,6 +34,10 @@ GraphiZeroTheQuadratics.json  - Spark Scala notebook exibitiing properties of ge
 
 KafkaStreamsTopics.json       - neo4j .conf scrips integrating kafka and neo4j.
 
+SingleVariableCritticalPoint.json    -  Spark Scala analysis of single variable P.
+
+MultiVariableNMGradientDescent.json  -  Spark Scala mulit varaible Gradient Descent, Newtons Method applied to selected p's.
+
 
 Java Jars:
 
