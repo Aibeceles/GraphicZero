@@ -1,0 +1,799 @@
+{
+  "paragraphs": [
+    {
+      "title": "Case Class Definitions.",
+      "text": "%spark\n\ncase class s3AQu(degree:String,scalar:String,divisior:String,MaxN:String,N:String,dimension:String)\ncase class s3AD(degree:String,scalar:String,divisior:String,MaxN:String,N:String,dimension:String,dDegree:String,dScalar:String)\ncase class s3ADD(degree:String,scalar:String,divisior:String,MaxN:String,N:String,dimension:String,dDegree:String,dScalar:String,ddDegree:String,ddScalar:String)\n\ncase class s3ARe(dimension:String,degree:String,scalar:String,index:String,maxIndex:String,divisor:String,result:String,xArg:String,xAxis:String)\ncase class plotP(x:Integer, y:Integer)\ncase class s3AxArg(degree:String,scalar:String,divisior:String,MaxN:String,N:String,dimension:String,xArg:String)\ncase class indexSum(iSum:String,finalISum:String)\n\ncase class s12QQu(index:String,MaxN:String,rowScalar:String,divisor:String,scalar:String,degree:String)\ncase class redScal(Scalar:String,MaxN:String,Degree:String)\n\ncase class nextX(nX:String)\ncase class s3aArg(dim:String,maxN:String,n:String)\n\ncase class dSqTrms(deg1:String,sca1:String,div1:String,deg2:String,sca2:String,div2:String)\ncase class dSqTrmsR(deg1:String,sca1:String,div1:String,deg2:String,sca2:String,div2:String,degR:String,scalR:String,divR:String)   //  not to use...\ncase class dSQTR(degR:String,scalR:String,divR:String)\n\ncase class graphArgs(x:String,y:String,result:String)\ncase class pcTrmsArgsR(deg1:String,sca1:String,div1:String,deg2:String,sca2:String,div2:String,nMax1:String,nMax2:String,x:String,y:String,result:String)\ncase class pcTrmsArgs(deg1:String,sca1:String,div1:String,deg2:String,sca2:String,div2:String,nMax1:String,nMax2:String,x:String,y:String)\ncase class pcTrms(deg1:String,sca1:String,div1:String,deg2:String,sca2:String,div2:String,nMax1:String,nMax2:String)\ncase class nextXY(x:String,y:String)\n\ncase class graphArgsD(x:Double,y:Double,result:Double)\ncase class nextXYD(x:Double,y:Double)\ncase class hess(a:Double,b:Double,c:Double,d:Double)\ncase class dobb(x:Double)\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-03-11 09:10:35.479",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1646155334525_-921600798",
+      "id": "20220204-102042_565573326",
+      "dateCreated": "2022-03-01 12:22:14.525",
+      "dateStarted": "2022-03-11 09:10:35.785",
+      "dateFinished": "2022-03-11 09:10:40.112",
+      "status": "ERROR",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "Query P() with D greater than  two.",
+      "text": "%spark\nobject QueryS3AQuery {\n  \nimport zadscripts.DFScripts\nimport scala.collection.mutable.ArrayBuffer\nimport scala.math.BigDecimal\nimport org.apache.spark.sql.types.DecimalType\n\nval dfs \u003d new DFScripts \n\ndef s3AQuery(rLow:String,rHigh:String,nMax:String,dimension:String): ArrayBuffer[s3AQu] \u003d {\n\nval terms \u003d new ArrayBuffer[s3AQu]()\nval s3AQRS \u003d dfs.s3A(rLow,rHigh,nMax,dimension)\n\nwhile (s3AQRS.next()) {\nterms +\u003d s3AQu(s3AQRS.getString(1),s3AQRS.getString(2),s3AQRS.getString(3),s3AQRS.getString(4),s3AQRS.getString(5),dimension)\n}\nterms\n}\n\ndef main(args:Array[String]) {\n\nval terms \u003d new ArrayBuffer[ArrayBuffer[s3AQu]]()\nval nMax \u003d args(0)        //   arg(0) is not nMax.  assignment can be removed...                          \n\n//for(a \u003c- 1 to 1; n \u003c- BigInt(args(1)).intValue() to BigInt(args(1)).intValue();b \u003c- 0 to 0) {\n     terms +\u003d s3AQuery(args(2),args(2),args(1),args(0))\n\n//}\n\nval mainTermss\u003dterms.flatMap(_.toList)\n\nval df \u003d spark.createDataFrame(mainTermss)\nval dfCount \u003d df.count()\ndf.show(dfCount.toInt,false)\nz.put(args(3),df)\n}\n}",
+      "user": "anonymous",
+      "dateUpdated": "2022-03-05 12:55:43.146",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1646155644134_-794336096",
+      "id": "20220301-122724_1330005833",
+      "dateCreated": "2022-03-01 12:27:24.134",
+      "dateStarted": "2022-03-05 12:55:43.612",
+      "dateFinished": "2022-03-05 12:55:44.605",
+      "status": "FINISHED",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%spark\nQueryS3AQuery.main(Array(\"8\",\"8\",\"5\",\"s3080805\"))    // as dimension,maxN,n,dataframe name\nQueryS3AQuery.main(Array(\"8\",\"16\",\"6\",\"s3081606\"))    // as dimension,maxN,n,dataframe name",
+      "user": "anonymous",
+      "dateUpdated": "2022-03-05 12:55:48.498",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1646155643344_-198870359",
+      "id": "20220301-122723_640177145",
+      "dateCreated": "2022-03-01 12:27:23.344",
+      "dateStarted": "2022-03-05 12:55:48.885",
+      "dateFinished": "2022-03-05 12:55:53.009",
+      "status": "FINISHED",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%spark\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-03-01 12:27:22.604",
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1646155642603_-1144415564",
+      "id": "20220301-122722_1029332482",
+      "dateCreated": "2022-03-01 12:27:22.603",
+      "status": "READY",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%spark\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-03-01 12:27:21.724",
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1646155641724_845003008",
+      "id": "20220301-122721_188758146",
+      "dateCreated": "2022-03-01 12:27:21.724",
+      "status": "READY",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "Compute Partial Derivative DataFrames.",
+      "text": "%spark\n// case class s3AQu(degree:String,scalar:String,divisior:String,MaxN:String,N:String,dimension:String)\n// case class s3AD(degree:String,scalar:String,divisior:String,MaxN:String,N:String,dimension:String,dDegree:String,dScalar:String)\n\n// case class s3ADD(degree:String,scalar:String,divisior:String,MaxN:String,N:String,dimension:String,dDegree:String,dScalar:String,ddDegree:String,ddScalar:String)\n// case class pcTrms(deg1:String,sca1:String,div1:String,deg2:String,sca2:String,div2:String,nMax1:String,nMax2:String)\nobject DiffArgs extends Serializable {\n\nimport org.apache.spark.sql.{DataFrame,Dataset}\nimport org.apache.spark.sql.types._\nimport java.math.BigDecimal\n\ndef differentiatedResult(q:s3AQu): s3ADD \u003d {     \n \n  val degree\u003d q.degree\n  val one \u003d new BigDecimal(\"1\")\n  val degreee\u003d new BigDecimal(degree)\n  val degreeee\u003d degreee.subtract(one);\n  val scalar \u003d degreeee.toPlainString match {\n      case \"-1\" \u003d\u003e \"0\"\n      case  _ \u003d\u003e { val x\u003dnew BigDecimal(q.scalar); degreee.multiply(x).toString }\n  }\n  val debb \u003d degreeee.toString match {\n      case \"-1\" \u003d\u003e \"0\"\n      case   _ \u003d\u003e degreeee.toString\n  }\n  val  deh \u003d new BigDecimal(debb)\n  val dehh \u003d deh.subtract(one)\n  val scalar1 \u003d dehh.toPlainString match {\n      case \"-1\" \u003d\u003e \"0\"\n      case  _ \u003d\u003e { val x\u003dnew BigDecimal(scalar); deh.multiply(x).toString }\n  }\n  val dehhh \u003d dehh.toString match {\n      case \"-1\" \u003d\u003e \"0\"\n      case   _ \u003d\u003e dehh.toString\n  }\n  val s\u003d s3ADD(q.degree,q.scalar,q.divisior,q.MaxN,q.N,q.dimension,debb,scalar,dehhh,scalar1) \n  s\n}\n\ndef main(args:Array[String]) {\n     val p1DF\u003d z.get(args(0)).asInstanceOf[DataFrame]\n     val p1DF1: Dataset[s3AQu] \u003d p1DF.as[s3AQu]\n     p1DF1.show()\n     val p2DF\u003d z.get(args(1)).asInstanceOf[DataFrame]\n     val p2DF1: Dataset[s3AQu] \u003d p2DF.as[s3AQu]\n     p2DF1.show()\n \n     val p1DF2\u003dp1DF1.map{f \u003d\u003e differentiatedResult(s3AQu(f.degree,f.scalar,f.divisior,f.MaxN,f.N,f.dimension)) }\n     p1DF2.show()\n \n     val p2DF2\u003dp2DF1.map{f \u003d\u003e differentiatedResult(s3AQu(f.degree,f.scalar,f.divisior,f.MaxN,f.N,f.dimension)) }\n     p2DF2.show()\n\n     val p1DFCG\u003dp1DF2.crossJoin(p2DF2).asInstanceOf[DataFrame]     //  Maybe this is the partial of x..\n     p1DFCG.show()\n\n     val p2DFCG\u003dp2DF2.crossJoin(p1DF2).asInstanceOf[DataFrame]     //  Maybe this is the partial of y..   Think only one is needed.\n     p2DFCG.show()\n\n     z.put(args(2),p1DF2)\n     z.put(args(3),p2DF2)\n\n     z.put(args(4),p1DFCG)\n     z.put(args(5),p2DFCG)\n  }\n}\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-03-05 12:56:00.151",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "editorHide": false,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "defined object DiffArgs\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1646155334535_597086838",
+      "id": "20220204-130824_961846572",
+      "dateCreated": "2022-03-01 12:22:14.535",
+      "dateStarted": "2022-03-05 12:56:00.596",
+      "dateFinished": "2022-03-05 12:56:01.167",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%spark\nDiffArgs.main(Array(\"s3080805\",\"s3081606\",\"ParX\",\"ParY\",\"PartialsX\",\"PartialsY\"))",
+      "user": "anonymous",
+      "dateUpdated": "2022-03-05 12:56:07.216",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1646155334535_1703102550",
+      "id": "20220204-130823_862935330",
+      "dateCreated": "2022-03-01 12:22:14.535",
+      "dateStarted": "2022-03-05 12:56:07.673",
+      "dateFinished": "2022-03-05 12:56:09.296",
+      "status": "FINISHED",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "Populate graph data lists.",
+      "text": "%spark\n//case class graphArgsD(x:Double,y:Double,result:Double)\n//case class nextXYD(x:Double,y:Double)\nobject ZLists extends Serializable {\n\nimport org.apache.spark.sql.DataFrame\nimport org.apache.spark.sql.types._\nimport java.math.BigDecimal\n//import org.apache.spark.mllib.linalg._\nimport breeze.linalg._\nimport breeze.numerics._\nimport scala.collection.mutable.ArrayBuffer\n \ndef polyEvaluate(fPL:List[pcTrms])(xY:nextXYD): graphArgsD \u003d {      \n    var result \u003d new BigDecimal(\"0\")\n    for (terms \u003c- fPL)\n     {\n      val s1 \u003d new BigDecimal(terms.sca1)\n      val deg1 \u003d terms.deg1.toInt\n      val div1 \u003d new BigDecimal(terms.div1)\n      val x \u003d new BigDecimal(xY.x)\n      val s2 \u003d new BigDecimal(terms.sca2)\n      val deg2 \u003d terms.deg2.toInt\n      val div2 \u003d new BigDecimal(terms.div2)  \n      val y \u003d new BigDecimal(xY.y) \n      val d1R\u003dx.pow(deg1)\n      val s1R\u003ds1.multiply(d1R)\n      val d2R\u003dy.pow(deg2)\n      val s2R\u003ds2.multiply(d2R)\n      val divRes\u003ddiv1.multiply(div2)\n      val res\u003ds1R.multiply(s2R).divide(divRes)\n      val scale\u003d new BigDecimal(\"10000\")\n      val xAxis\u003dx.multiply(scale)\n      val yAxis\u003dy.multiply(scale)\n       result\u003dresult.add(res)\n      }\n //     var r\u003d log(result.doubleValue())\n//      val s\u003d graphArgsD(xY.x,xY.y,r)\n      val s\u003d graphArgsD(xY.x,xY.y,result.doubleValue())\n     s\n}\n\ndef main(args:Array[String]) {\n\n     val p1DF\u003d z.get(args(0)).asInstanceOf[DataFrame]\n //    p1DF.show()\n//     val fOfdX \u003dp1DF.map(row \u003d\u003e pcTrms(row.getString(6), row.getString(7), row.getString(2), row.getString(10), row.getString(11), row.getString(12), row.getString(3), row.getString(13))).collect.toList\n//     val fA \u003dp1DF.map(row \u003d\u003e pcTrms(row.getString(8), row.getString(9), row.getString(2), row.getString(10), row.getString(11), row.getString(12), row.getString(3), row.getString(13))).collect.toList\n     val fA \u003dp1DF.map(row \u003d\u003e pcTrms(row.getString(0), row.getString(1), row.getString(2), row.getString(10), row.getString(11), row.getString(12), row.getString(3), row.getString(13))).collect.toList\n\n\n\n //    def polyEvalwP\u003dpolyEvaluate(fOfdX)_\n     def polyEvalwP\u003dpolyEvaluate(fA)_\n\n    val terms \u003d new ArrayBuffer[List[Double]]()\n    val axisT \u003d new ArrayBuffer[String]()    \n    val termX \u003d new BigDecimal(\"-1000.0\")\n    val termY \u003d new BigDecimal(\"-1000.0\")\n    val step \u003d new BigDecimal(\"2.0\")\n\n    for (x \u003c- 1 to 1000)  { \n    val yTerms \u003d new ArrayBuffer[graphArgsD]()   \n  //  axisT+\u003dx.toString()\n    for (y \u003c- 1 to 1000)  {        \n      val xx\u003dnew BigDecimal(x)   \n      val yy\u003dnew BigDecimal(y)\n      val nextStepX\u003d step.multiply(xx)\n      val nextStepY\u003d step.multiply(yy)\n      val nextXX\u003dtermX.add(nextStepX)\n      val nextYY\u003dtermY.add(nextStepY)  \n\n      yTerms+\u003dpolyEvalwP(nextXYD(nextXX.doubleValue(),nextYY.doubleValue())) \n     \n      if (y\u003d\u003d1) {axisT+\u003dnextXX.toString}\n\n \n    }\n     val rList \u003d yTerms.map(f \u003d\u003e f.result).toList    // is a list of Double      \n//    println(\"rList: \"+rList)\n     terms+\u003drList\n    }\n    val axisTT\u003daxisT.toList\n    val termsL\u003dterms.toList\n     z.put(args(1),termsL)\n     z.put(args(2),axisTT)\n  }\n}\n\n\n\n\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-03-05 12:45:08.604",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true,
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1646155334535_1594133965",
+      "id": "20220301-110049_1134657523",
+      "dateCreated": "2022-03-01 12:22:14.535",
+      "dateStarted": "2022-03-05 12:45:08.992",
+      "dateFinished": "2022-03-05 12:45:09.296",
+      "status": "FINISHED",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%spark\nZLists.main(Array(\"PartialsX\",\"GraphArgs\",\"GraphAxis\"))",
+      "user": "anonymous",
+      "dateUpdated": "2022-03-05 12:45:18.078",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1646155334535_-88278530",
+      "id": "20220301-110049_1149338864",
+      "dateCreated": "2022-03-01 12:22:14.535",
+      "dateStarted": "2022-03-05 12:45:18.577",
+      "dateFinished": "2022-03-05 12:45:25.517",
+      "status": "FINISHED",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "Graph the data Lists.",
+      "text": "%spark\nobject PlotDataa extends Serializable {\n\nimport play.api.libs.json._\nimport play.api.libs.functional.syntax._\nimport zadscripts.DFScripts\nimport org.apache.spark.sql.{DataFrame,Dataset,Row}\nimport scala.collection.mutable.ArrayBuffer\nimport java.math.BigDecimal\nimport org.apache.spark.sql.types._\nimport spark.implicits._\n\ndef main(args:Array[String]) {\n    val termsL\u003d z.get(args(0)).asInstanceOf[List[List[Double]]]\n    val axisT\u003d  z.get(args(1)).asInstanceOf[List[String]]\n     val randomIndex \u003d Math.abs(scala.util.Random.nextInt)\n     print(s\"\"\"%html\n    \u003chead\u003e\u003cscript src\u003d\"https://cdn.plot.ly/plotly-latest.min.js\"\u003e\u003c/script\u003e\u003c/head\u003e\n    \u003cbody\u003e\u003cdiv id\u003d\"plotCat_${randomIndex}\"\u003e\u003c/div\u003e\u003c/body\u003e\n    \u003cscript\u003e\n      var data \u003d [\n        {\n          z: ${Json.toJson(termsL)},\n          x: ${Json.toJson(axisT)},\n          y: ${Json.toJson(axisT)},\n          type: \u0027surface\u0027\n        }\n      ];\n       var layout \u003d {\n //      backgroundcolor : rgb(200, 200, 200, 0.5)\n       title: \u0027My Plot\u0027,\n       autosize: false,   \n       width: 500,\n       height: 500,\n       margin: {\n         l: 65,\n         r: 50,\n         b: 65,\n         t: 90,\n       }\n      }\n      Plotly.newPlot(\u0027plotCat_${randomIndex}\u0027, data, layout);\n    \u003c/script\u003e\n  \"\"\")\n\n}\n}",
+      "user": "anonymous",
+      "dateUpdated": "2022-03-05 12:45:27.946",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true,
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1646155334535_-648317113",
+      "id": "20220301-110048_594011300",
+      "dateCreated": "2022-03-01 12:22:14.535",
+      "dateStarted": "2022-03-05 12:45:28.405",
+      "dateFinished": "2022-03-05 12:45:28.618",
+      "status": "FINISHED",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%spark\nPlotDataa.main(Array(\"GraphArgs\",\"GraphAxis\"))\n// QuerryS12QuadQuerry.main(Array(\"8\",\"5\",\"N5MaxN8\"))   2nd derivative of quartet     (logrithmic scale)\n//QuerryS12QuadQuerry.main(Array(\"16\",\"6\",\"N6MaxN16\"))  quartet",
+      "user": "anonymous",
+      "dateUpdated": "2022-03-05 12:45:33.109",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1646155334535_-1642540621",
+      "id": "20220301-110048_1437804990",
+      "dateCreated": "2022-03-01 12:22:14.535",
+      "dateStarted": "2022-03-05 12:45:36.929",
+      "dateFinished": "2022-03-05 12:45:45.651",
+      "status": "FINISHED",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%spark\n\nobject PlotData extends Serializable {\n\nimport play.api.libs.json._\nimport play.api.libs.functional.syntax._\nimport zadscripts.DFScripts\nimport org.apache.spark.sql.{DataFrame,Dataset,Row}\nimport scala.collection.mutable.ArrayBuffer\nimport java.math.BigDecimal\nimport org.apache.spark.sql.types._\nimport spark.implicits._\n//case class dobb(x:Double)\n//case class graphArgsD(x:Double,y:Double,result:Double)\n\ndef main(args:Array[String]) {\n    val termsL\u003d z.get(args(0)).asInstanceOf[List[List[Double]]]\n    val axisT\u003d  z.get(args(1)).asInstanceOf[List[String]]\n     val randomIndex \u003d Math.abs(scala.util.Random.nextInt)\n     print(s\"\"\"%html\n    \u003chead\u003e\u003cscript src\u003d\"https://cdn.plot.ly/plotly-latest.min.js\"\u003e\u003c/script\u003e\u003c/head\u003e\n    \u003cbody\u003e\u003cdiv id\u003d\"plotCat_${randomIndex}\"\u003e\u003c/div\u003e\u003c/body\u003e\n    \u003cscript\u003e\n      var data \u003d [\n        {\n          z: ${Json.toJson(termsL)},\n          x: ${Json.toJson(axisT)},\n          y: ${Json.toJson(axisT)},\n          type: \u0027contour\u0027\n        }\n      ];\n       var layout \u003d {\n //      backgroundcolor : rgb(200, 200, 200, 0.5)\n       title: \u0027My Plot\u0027,\n       autosize: false,   \n       width: 500,\n       height: 500,\n       margin: {\n         l: 65,\n         r: 50,\n         b: 65,\n         t: 90,\n       }\n      }\n      Plotly.newPlot(\u0027plotCat_${randomIndex}\u0027, data, layout);\n    \u003c/script\u003e\n  \"\"\")\n}\n}\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-03-05 12:46:26.435",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "defined object PlotData\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1646155334655_-1176664791",
+      "id": "20220301-110048_762191131",
+      "dateCreated": "2022-03-01 12:22:14.655",
+      "dateStarted": "2022-03-05 12:46:26.829",
+      "dateFinished": "2022-03-05 12:46:27.062",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%spark\nPlotData.main(Array(\"GraphArgs\",\"GraphAxis\"))\n// QuerryS12QuadQuerry.main(Array(\"8\",\"5\",\"N5MaxN8\"))   2nd derivative of quartet     (logrithmic scale)\n//QuerryS12QuadQuerry.main(Array(\"16\",\"6\",\"N6MaxN16\"))  quartet",
+      "user": "anonymous",
+      "dateUpdated": "2022-03-05 12:46:33.364",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1646158425313_-1130496533",
+      "id": "20220301-131345_991070432",
+      "dateCreated": "2022-03-01 13:13:45.313",
+      "dateStarted": "2022-03-05 12:46:36.473",
+      "dateFinished": "2022-03-05 12:46:46.375",
+      "status": "FINISHED",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%spark\n\n\nimport org.apache.spark.sql.{DataFrame,Dataset}\n\nobject MapPXY extends Serializable {\n\ndef main(args:Array[String]) {\n\n     val p1DF \u003d z.get(args(0)).asInstanceOf[Dataset[s3ADD]]\n     val p2DF \u003d z.get(args(1)).asInstanceOf[Dataset[s3ADD]]\n     \n     p1DF.show()\n     p2DF.show()\n \n//    val fA \u003dp1DF.map(row \u003d\u003e pcTrms(row.getString(8), row.getString(9), row.getString(2),        row.getString(10), row.getString(11), row.getString(12), row.getString(3), row.getString(13))).collect.toList\n//     case class s3AQu(degree:String,   scalar:String,     divisior:String,     MaxN:String,      N:String,      dimension:String)\n\n//val fA \u003dp1DF.map(r \u003d\u003e s3AQu(r.ddDegree,r.ddScalar,r.divisior,\"0\",\"0\",\"0\"))  \n   val fA \u003dp1DF.map(r \u003d\u003e s3AQu(r.degree,r.scalar,r.divisior,\"0\",\"0\",\"0\"))\n     val fB \u003dp2DF.map(r \u003d\u003e s3AQu(r.degree,r.scalar,r.divisior,\"0\",\"0\",\"0\"))\n\n     fA.show()\n     fB.show()\n\n     z.put(args(2),fA)\n     z.put(args(3),fB)\n\n  }\n}\n\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-03-05 12:56:20.811",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "import org.apache.spark.sql.{DataFrame, Dataset}\r\ndefined object MapPXY\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1646158424803_1540443106",
+      "id": "20220301-131344_1503726602",
+      "dateCreated": "2022-03-01 13:13:44.803",
+      "dateStarted": "2022-03-05 12:56:21.297",
+      "dateFinished": "2022-03-05 12:56:21.598",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%spark\nMapPXY.main(Array(\"ParX\",\"ParY\",\"PX\",\"PY\"))",
+      "user": "anonymous",
+      "dateUpdated": "2022-03-05 12:56:26.123",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1646158424191_-955356286",
+      "id": "20220301-131344_316384872",
+      "dateCreated": "2022-03-01 13:13:44.191",
+      "dateStarted": "2022-03-05 12:56:26.559",
+      "dateFinished": "2022-03-05 12:56:27.125",
+      "status": "FINISHED",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%spark\nDiffArgs.main(Array(\"PX\",\"PY\",\"rX\",\"rY\",\"dPX\",\"dPY\"))    //\"rX\",\"rY\" are not used this time.  would need refactor.",
+      "user": "anonymous",
+      "dateUpdated": "2022-03-05 12:56:34.617",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+------+------+--------+----+---+---------+\n|degree|scalar|divisior|MaxN|  N|dimension|\n+------+------+--------+----+---+---------+\n|     4|     6|       4|   0|  0|        0|\n|     3|  -168|       4|   0|  0|        0|\n|     0| 15328|       4|   0|  0|        0|\n|     2|  1786|       4|   0|  0|        0|\n|     1| -8508|       4|   0|  0|        0|\n+------+------+--------+----+---+---------+\n\r\n+------+-------+--------+----+---+---------+\n|degree| scalar|divisior|MaxN|  N|dimension|\n+------+-------+--------+----+---+---------+\n|     2|  18492|       4|   0|  0|        0|\n|     1|-183448|       4|   0|  0|        0|\n|     0| 683648|       4|   0|  0|        0|\n|     3|   -830|       4|   0|  0|        0|\n|     4|     14|       4|   0|  0|        0|\n+------+-------+--------+----+---+---------+\n\r\n+------+------+--------+----+---+---------+-------+-------+--------+--------+\n|degree|scalar|divisior|MaxN|  N|dimension|dDegree|dScalar|ddDegree|ddScalar|\n+------+------+--------+----+---+---------+-------+-------+--------+--------+\n|     4|     6|       4|   0|  0|        0|      3|     24|       2|      72|\n|     3|  -168|       4|   0|  0|        0|      2|   -504|       1|   -1008|\n|     0| 15328|       4|   0|  0|        0|      0|      0|       0|       0|\n|     2|  1786|       4|   0|  0|        0|      1|   3572|       0|    3572|\n|     1| -8508|       4|   0|  0|        0|      0|  -8508|       0|       0|\n+------+------+--------+----+---+---------+-------+-------+--------+--------+\n\r\n+------+-------+--------+----+---+---------+-------+-------+--------+--------+\n|degree| scalar|divisior|MaxN|  N|dimension|dDegree|dScalar|ddDegree|ddScalar|\n+------+-------+--------+----+---+---------+-------+-------+--------+--------+\n|     2|  18492|       4|   0|  0|        0|      1|  36984|       0|   36984|\n|     1|-183448|       4|   0|  0|        0|      0|-183448|       0|       0|\n|     0| 683648|       4|   0|  0|        0|      0|      0|       0|       0|\n|     3|   -830|       4|   0|  0|        0|      2|  -2490|       1|   -4980|\n|     4|     14|       4|   0|  0|        0|      3|     56|       2|     168|\n+------+-------+--------+----+---+---------+-------+-------+--------+--------+\n\r\n+------+------+--------+----+---+---------+-------+-------+--------+--------+------+-------+--------+----+---+---------+-------+-------+--------+--------+\n|degree|scalar|divisior|MaxN|  N|dimension|dDegree|dScalar|ddDegree|ddScalar|degree| scalar|divisior|MaxN|  N|dimension|dDegree|dScalar|ddDegree|ddScalar|\n+------+------+--------+----+---+---------+-------+-------+--------+--------+------+-------+--------+----+---+---------+-------+-------+--------+--------+\n|     4|     6|       4|   0|  0|        0|      3|     24|       2|      72|     2|  18492|       4|   0|  0|        0|      1|  36984|       0|   36984|\n|     4|     6|       4|   0|  0|        0|      3|     24|       2|      72|     1|-183448|       4|   0|  0|        0|      0|-183448|       0|       0|\n|     4|     6|       4|   0|  0|        0|      3|     24|       2|      72|     0| 683648|       4|   0|  0|        0|      0|      0|       0|       0|\n|     4|     6|       4|   0|  0|        0|      3|     24|       2|      72|     3|   -830|       4|   0|  0|        0|      2|  -2490|       1|   -4980|\n|     4|     6|       4|   0|  0|        0|      3|     24|       2|      72|     4|     14|       4|   0|  0|        0|      3|     56|       2|     168|\n|     3|  -168|       4|   0|  0|        0|      2|   -504|       1|   -1008|     2|  18492|       4|   0|  0|        0|      1|  36984|       0|   36984|\n|     3|  -168|       4|   0|  0|        0|      2|   -504|       1|   -1008|     1|-183448|       4|   0|  0|        0|      0|-183448|       0|       0|\n|     3|  -168|       4|   0|  0|        0|      2|   -504|       1|   -1008|     0| 683648|       4|   0|  0|        0|      0|      0|       0|       0|\n|     3|  -168|       4|   0|  0|        0|      2|   -504|       1|   -1008|     3|   -830|       4|   0|  0|        0|      2|  -2490|       1|   -4980|\n|     3|  -168|       4|   0|  0|        0|      2|   -504|       1|   -1008|     4|     14|       4|   0|  0|        0|      3|     56|       2|     168|\n|     0| 15328|       4|   0|  0|        0|      0|      0|       0|       0|     2|  18492|       4|   0|  0|        0|      1|  36984|       0|   36984|\n|     0| 15328|       4|   0|  0|        0|      0|      0|       0|       0|     1|-183448|       4|   0|  0|        0|      0|-183448|       0|       0|\n|     0| 15328|       4|   0|  0|        0|      0|      0|       0|       0|     0| 683648|       4|   0|  0|        0|      0|      0|       0|       0|\n|     0| 15328|       4|   0|  0|        0|      0|      0|       0|       0|     3|   -830|       4|   0|  0|        0|      2|  -2490|       1|   -4980|\n|     0| 15328|       4|   0|  0|        0|      0|      0|       0|       0|     4|     14|       4|   0|  0|        0|      3|     56|       2|     168|\n|     2|  1786|       4|   0|  0|        0|      1|   3572|       0|    3572|     2|  18492|       4|   0|  0|        0|      1|  36984|       0|   36984|\n|     2|  1786|       4|   0|  0|        0|      1|   3572|       0|    3572|     1|-183448|       4|   0|  0|        0|      0|-183448|       0|       0|\n|     2|  1786|       4|   0|  0|        0|      1|   3572|       0|    3572|     0| 683648|       4|   0|  0|        0|      0|      0|       0|       0|\n|     2|  1786|       4|   0|  0|        0|      1|   3572|       0|    3572|     3|   -830|       4|   0|  0|        0|      2|  -2490|       1|   -4980|\n|     2|  1786|       4|   0|  0|        0|      1|   3572|       0|    3572|     4|     14|       4|   0|  0|        0|      3|     56|       2|     168|\n+------+------+--------+----+---+---------+-------+-------+--------+--------+------+-------+--------+----+---+---------+-------+-------+--------+--------+\nonly showing top 20 rows\n\r\n+------+-------+--------+----+---+---------+-------+-------+--------+--------+------+------+--------+----+---+---------+-------+-------+--------+--------+\n|degree| scalar|divisior|MaxN|  N|dimension|dDegree|dScalar|ddDegree|ddScalar|degree|scalar|divisior|MaxN|  N|dimension|dDegree|dScalar|ddDegree|ddScalar|\n+------+-------+--------+----+---+---------+-------+-------+--------+--------+------+------+--------+----+---+---------+-------+-------+--------+--------+\n|     2|  18492|       4|   0|  0|        0|      1|  36984|       0|   36984|     4|     6|       4|   0|  0|        0|      3|     24|       2|      72|\n|     2|  18492|       4|   0|  0|        0|      1|  36984|       0|   36984|     3|  -168|       4|   0|  0|        0|      2|   -504|       1|   -1008|\n|     2|  18492|       4|   0|  0|        0|      1|  36984|       0|   36984|     0| 15328|       4|   0|  0|        0|      0|      0|       0|       0|\n|     2|  18492|       4|   0|  0|        0|      1|  36984|       0|   36984|     2|  1786|       4|   0|  0|        0|      1|   3572|       0|    3572|\n|     2|  18492|       4|   0|  0|        0|      1|  36984|       0|   36984|     1| -8508|       4|   0|  0|        0|      0|  -8508|       0|       0|\n|     1|-183448|       4|   0|  0|        0|      0|-183448|       0|       0|     4|     6|       4|   0|  0|        0|      3|     24|       2|      72|\n|     1|-183448|       4|   0|  0|        0|      0|-183448|       0|       0|     3|  -168|       4|   0|  0|        0|      2|   -504|       1|   -1008|\n|     1|-183448|       4|   0|  0|        0|      0|-183448|       0|       0|     0| 15328|       4|   0|  0|        0|      0|      0|       0|       0|\n|     1|-183448|       4|   0|  0|        0|      0|-183448|       0|       0|     2|  1786|       4|   0|  0|        0|      1|   3572|       0|    3572|\n|     1|-183448|       4|   0|  0|        0|      0|-183448|       0|       0|     1| -8508|       4|   0|  0|        0|      0|  -8508|       0|       0|\n|     0| 683648|       4|   0|  0|        0|      0|      0|       0|       0|     4|     6|       4|   0|  0|        0|      3|     24|       2|      72|\n|     0| 683648|       4|   0|  0|        0|      0|      0|       0|       0|     3|  -168|       4|   0|  0|        0|      2|   -504|       1|   -1008|\n|     0| 683648|       4|   0|  0|        0|      0|      0|       0|       0|     0| 15328|       4|   0|  0|        0|      0|      0|       0|       0|\n|     0| 683648|       4|   0|  0|        0|      0|      0|       0|       0|     2|  1786|       4|   0|  0|        0|      1|   3572|       0|    3572|\n|     0| 683648|       4|   0|  0|        0|      0|      0|       0|       0|     1| -8508|       4|   0|  0|        0|      0|  -8508|       0|       0|\n|     3|   -830|       4|   0|  0|        0|      2|  -2490|       1|   -4980|     4|     6|       4|   0|  0|        0|      3|     24|       2|      72|\n|     3|   -830|       4|   0|  0|        0|      2|  -2490|       1|   -4980|     3|  -168|       4|   0|  0|        0|      2|   -504|       1|   -1008|\n|     3|   -830|       4|   0|  0|        0|      2|  -2490|       1|   -4980|     0| 15328|       4|   0|  0|        0|      0|      0|       0|       0|\n|     3|   -830|       4|   0|  0|        0|      2|  -2490|       1|   -4980|     2|  1786|       4|   0|  0|        0|      1|   3572|       0|    3572|\n|     3|   -830|       4|   0|  0|        0|      2|  -2490|       1|   -4980|     1| -8508|       4|   0|  0|        0|      0|  -8508|       0|       0|\n+------+-------+--------+----+---+---------+-------+-------+--------+--------+------+------+--------+----+---+---------+-------+-------+--------+--------+\nonly showing top 20 rows\n\r\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1646155334655_1139337712",
+      "id": "20220301-110047_817582032",
+      "dateCreated": "2022-03-01 12:22:14.655",
+      "dateStarted": "2022-03-05 12:56:35.049",
+      "dateFinished": "2022-03-05 12:56:35.989",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%spark\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-03-03 10:46:05.496",
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1646322365496_-705547838",
+      "id": "20220303-104605_2050428291",
+      "dateCreated": "2022-03-03 10:46:05.496",
+      "status": "READY",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%spark\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-03-03 10:46:02.770",
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1646322362770_-88395034",
+      "id": "20220303-104602_63586213",
+      "dateCreated": "2022-03-03 10:46:02.770",
+      "status": "READY",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%spark\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-03-01 12:22:14.655",
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1646155334655_1748026269",
+      "id": "20220301-110046_169477317",
+      "dateCreated": "2022-03-01 12:22:14.655",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "Newton\u0027s Descent",
+      "text": "%spark\n//case class graphArgsD(x:Double,y:Double,result:Double)\n//case class nextXYD(x:Double,y:Double)\nobject MatrixAndVectorFunctionsandNewton extends Serializable {\n\nimport org.apache.spark.sql.DataFrame\nimport org.apache.spark.sql.types._\nimport java.math.BigDecimal\n//import org.apache.spark.mllib.linalg._\nimport breeze.linalg._\nimport breeze.numerics._\n\n\n//  def steepestDescent(x : Array[Double], learningRate : Double, tolerance : Double, fPL: List[(String,String,String)], fDL: List[(String,String,String)] ) \u003d {\n\n//case class graphArgsD(x:Double,y:Double,result:Double)\n//case class nextXYD(x:Double,y:Double)\n//case class hess(a:Double,b:Double,c:Double,d:Double)\n\ndef steepestDescent(x : nextXYD, learningRate : Double, tolerance : Double, cHess:nextXYD\u003d\u003ehess,cFun:nextXYD\u003d\u003enextXYD) \u003d {\n    \n    println(\"First Guess: \"+x.x+\" \"+x.y)\n    var xVectorCurrent\u003d new DenseVector(Array(x.x,x.y))\n    var nextGradient \u003d cFun(x)\n    var nextGradientVector \u003d new DenseVector(Array(nextGradient.x,nextGradient.y))\n    println(\"nextGradient: \" + nextGradient.x+\" \"+nextGradient.y)\n    var hessian \u003d cHess(x)\n    println(\"Hessian: \"+hessian.a+\" \"+hessian.b+\" \"+hessian.c+\" \"+hessian.d)\n    var hessianMatrix \u003d new DenseMatrix(2,2,Array(hessian.a,hessian.b,hessian.c,hessian.d))\n    var hessianGradient \u003dhessianMatrix*nextGradientVector\n    println(\"Hessian*Gradient: \" + hessianGradient)\n    var xVectorNextIterate \u003d xVectorCurrent - hessianGradient \n    println(\"xVectorNextIterate: \" + xVectorNextIterate)\n \n    var counter\u003d0\n    while (counter \u003c 10000) {\n        xVectorCurrent\u003dxVectorNextIterate\n//        xVectorCurrent\u003d new DenseVector(Array(x.x,x.y))\n        nextGradient \u003d cFun(nextXYD(xVectorNextIterate(0),xVectorNextIterate(1)))   // 3/4 test\n\n//        nextGradient \u003d cFun(x)     3/4 test\n        nextGradientVector \u003d new DenseVector(Array(nextGradient.x,nextGradient.y))\n//        println(\"nextGradient: \" + nextGradient.x+\" \"+nextGradient.y)\n//        hessian \u003d cHess(x)  3/4 test\n          hessian \u003d cHess(nextXYD(xVectorNextIterate(0),xVectorNextIterate(1)))  //  3/4 test\n\n//        println(\"Hessian: \"+hessian.a+\" \"+hessian.b+\" \"+hessian.c+\" \"+hessian.d)\n        hessianMatrix \u003d new DenseMatrix(2,2,Array(hessian.a,hessian.b,hessian.c,hessian.d))\n        hessianGradient \u003dhessianMatrix*nextGradientVector\n//        println(\"Hessian*Gradient: \" + hessianGradient)\n        xVectorNextIterate \u003d xVectorCurrent - hessianGradient \n        println(\"xVectorNextIterate: \" + xVectorNextIterate)\n        counter \u003d counter +1\n    }\n}  //  End of SteepestDescent method \n\n\ndef polyEvaluate(fPL:List[pcTrms])(xY:nextXYD): graphArgsD \u003d {      \n    var result \u003d new BigDecimal(\"0\")\n    for (terms \u003c- fPL)\n     {\n      val s1 \u003d new BigDecimal(terms.sca1)\n      val deg1 \u003d terms.deg1.toInt\n      val div1 \u003d new BigDecimal(terms.div1)\n      val x \u003d new BigDecimal(xY.x)\n      val s2 \u003d new BigDecimal(terms.sca2)\n      val deg2 \u003d terms.deg2.toInt\n      val div2 \u003d new BigDecimal(terms.div2)  \n      val y \u003d new BigDecimal(xY.y) \n      val d1R\u003dx.pow(deg1)\n      val s1R\u003ds1.multiply(d1R)\n      val d2R\u003dy.pow(deg2)\n      val s2R\u003ds2.multiply(d2R)\n      val divRes\u003ddiv1.multiply(div2)\n      val res\u003ds1R.multiply(s2R).divide(divRes)\n      val scale\u003d new BigDecimal(\"10000\")\n      val xAxis\u003dx.multiply(scale)\n      val yAxis\u003dy.multiply(scale)\n       result\u003dresult.add(res)\n     }\n      val s\u003d graphArgsD(xY.x,xY.y,result.doubleValue())\n     s\n}\n\ndef evalGradient(xF:(nextXYD)\u003d\u003egraphArgsD,yF:(nextXYD)\u003d\u003egraphArgsD)(xY:nextXYD): nextXYD \u003d {      \n    val polyE\u003dnextXYD(xF(xY).result,yF(xY).result)\n    polyE\n}\n\ndef evalHessian(aF:(nextXYD)\u003d\u003egraphArgsD,bF:(nextXYD)\u003d\u003egraphArgsD,cF:(nextXYD)\u003d\u003egraphArgsD,dF:(nextXYD)\u003d\u003egraphArgsD)(xY:nextXYD): hess \u003d {     \n    val a\u003daF(xY).result;val b\u003dbF(xY).result;val c\u003dcF(xY).result;val d\u003ddF(xY).result;\n    val det\u003d 1/((a*d)-(b*c))\n//    println(\"evalHessian det:\"+ det)\n//    println(\"evalHessian \"+a+\" \"+b+\" \"+c+\" \"+d)\n    val polyE\u003dhess( d*det,-b*det,-c*det,a*det)      \n    polyE\n}\n\n\ndef evalHessian1(aF:(nextXYD)\u003d\u003egraphArgsD,bF:(nextXYD)\u003d\u003egraphArgsD,cF:(nextXYD)\u003d\u003egraphArgsD,dF:(nextXYD)\u003d\u003egraphArgsD)(xY:nextXYD): hess \u003d {     \n    val a\u003daF(xY).result;val b\u003dbF(xY).result;val c\u003dcF(xY).result;val d\u003ddF(xY).result;\n    val det\u003d 1/((a*d)-(b*c))\n    println(\"EvalHessian1 \"+a+\" \"+b+\" \"+c+\" \"+d)\n    val polyE\u003dhess(a,b,c,d)      \n    polyE\n}\n\n//case class graphArgsD(x:Double,y:Double,result:Double)\n//case class nextXYD(x:Double,y:Double)\n//case class hess(a:Double,b:Double,c:Double,d:Double)\n\ndef main(args:Array[String]) {\n     val tolerance \u003d 0.0000001\n     val learningRate \u003d 0.05\n     val nxy\u003dnextXYD(200,122)\n     val p1DF\u003d z.get(args(0)).asInstanceOf[DataFrame]\n //    p1DF.show()\n\n\n     val fEval \u003dp1DF.map(row \u003d\u003e pcTrms(row.getString(0), row.getString(1), row.getString(2), row.getString(10), row.getString(11), row.getString(12), row.getString(3), row.getString(13))).collect.toList\n     def evFun \u003d polyEvaluate(fEval)_\n     println(\"eFun 14,6: \"+evFun(nxy))\n     println(\"eFun 14,4: \"+evFun(nextXYD(14,4)))  \n\n\n     val fOfdX \u003dp1DF.map(row \u003d\u003e pcTrms(row.getString(6), row.getString(7), row.getString(2), row.getString(10), row.getString(11), row.getString(12), row.getString(3), row.getString(13))).collect.toList\n     val fOfdY \u003dp1DF.map(row \u003d\u003e pcTrms(row.getString(0), row.getString(1), row.getString(2), row.getString(16), row.getString(17), row.getString(12), row.getString(3), row.getString(13))).collect.toList \n     def evGrad\u003devalGradient(polyEvaluate(fOfdX)_,polyEvaluate(fOfdY)_)_\n//     val e\u003devGrad(nxy)              \n//     println(\"evalGradientReturn \"+e.x+\" \"+e.y)\n\n     val fA \u003dp1DF.map(row \u003d\u003e pcTrms(row.getString(8), row.getString(9), row.getString(2), row.getString(10), row.getString(11), row.getString(12), row.getString(3), row.getString(13))).collect.toList\n     val fB \u003dp1DF.map(row \u003d\u003e pcTrms(row.getString(6), row.getString(7), row.getString(2), row.getString(16), row.getString(17), row.getString(12), row.getString(3), row.getString(13))).collect.toList\n     val fC \u003dp1DF.map(row \u003d\u003e pcTrms(row.getString(6), row.getString(7), row.getString(2), row.getString(16), row.getString(17), row.getString(12), row.getString(3), row.getString(13))).collect.toList\n     val fD \u003dp1DF.map(row \u003d\u003e pcTrms(row.getString(0), row.getString(1), row.getString(2), row.getString(18), row.getString(19), row.getString(12), row.getString(3), row.getString(13))).collect.toList      \n     def evHess\u003devalHessian(polyEvaluate(fA)_,polyEvaluate(fB)_,polyEvaluate(fC)_,polyEvaluate(fD)_)_     \n     def evHess1\u003devalHessian1(polyEvaluate(fA)_,polyEvaluate(fB)_,polyEvaluate(fC)_,polyEvaluate(fD)_)_  // test for correct inverse,, not production method.\n\n//println(\"fa: \"+ fA)\n//println(\"fb: \"+ fB)\n//println(\"fc: \"+ fC)\n//println(\"fd: \"+ fD)\n\n     steepestDescent(nxy, learningRate, tolerance,evHess ,evGrad)\n\n  }\n}",
+      "user": "anonymous",
+      "dateUpdated": "2022-03-05 12:56:43.138",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "title": true,
+        "results": {},
+        "enabled": true,
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "defined object MatrixAndVectorFunctionsandNewton\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1646155334655_-602797630",
+      "id": "20220220-082851_1713564065",
+      "dateCreated": "2022-03-01 12:22:14.655",
+      "dateStarted": "2022-03-05 12:56:43.555",
+      "dateFinished": "2022-03-05 12:56:45.442",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%spark\n\nMatrixAndVectorFunctionsandNewton.main(Array(\"dPX\",\"dPY\"))\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-03-05 12:57:12.021",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true,
+        "tableHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1646155334655_-1092076838",
+      "id": "20220220-082850_658963963",
+      "dateCreated": "2022-03-01 12:22:14.655",
+      "dateStarted": "2022-03-05 12:57:12.437",
+      "dateFinished": "2022-03-05 12:57:24.531",
+      "status": "FINISHED",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%spark\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-03-01 12:22:14.665",
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1646155334655_2050638300",
+      "id": "20220220-082850_43233364",
+      "dateCreated": "2022-03-01 12:22:14.655",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%spark\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-03-01 12:22:14.665",
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1646155334665_-581168064",
+      "id": "20220220-082850_1851089105",
+      "dateCreated": "2022-03-01 12:22:14.665",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "Gradient Descent",
+      "text": "%spark\n\n//case class graphArgsD(x:Double,y:Double,result:Double)\n//case class nextXYD(x:Double,y:Double)\nobject GDescent extends Serializable {\n\nimport org.apache.spark.sql.DataFrame\nimport org.apache.spark.sql.types._\nimport java.math.BigDecimal\n//import org.apache.spark.mllib.linalg._\nimport breeze.linalg._\nimport breeze.numerics._\n\n\n//  def steepestDescent(x : Array[Double], learningRate : Double, tolerance : Double, fPL: List[(String,String,String)], fDL: List[(String,String,String)] ) \u003d {\n//case class graphArgsD(x:Double,y:Double,result:Double)\n//case class nextXYD(x:Double,y:Double)\n//case class hess(a:Double,b:Double,c:Double,d:Double)\n\ndef steepestDescent(x : nextXYD, learningRate : Double, tolerance : Double, cHess:nextXYD\u003d\u003ehess,cFun:nextXYD\u003d\u003enextXYD) \u003d {\n    \n    println(\"First Guess: \"+x.x+\" \"+x.y)\n    var xVectorCurrent\u003d new DenseVector(Array(x.x,x.y))\n    var nextGradient \u003d cFun(x)\n    var nextGradientVector \u003d new DenseVector(Array(nextGradient.x,nextGradient.y))\n    println(\"nextGradient: \" + nextGradient.x+\" \"+nextGradient.y)\n//    var hessian \u003d cHess(x)\n//    println(\"Hessian: \"+hessian.a+\" \"+hessian.b+\" \"+hessian.c+\" \"+hessian.d)\n//    var hessianMatrix \u003d new DenseMatrix(2,2,Array(hessian.a,hessian.b,hessian.c,hessian.d))\n//    var hessianGradient \u003dhessianMatrix*nextGradientVector\n//    println(\"Hessian*Gradient: \" + hessianGradient)\n//    var xVectorNextIterate \u003d xVectorCurrent - hessianGradient \n    var xVectorNextIterate \u003d xVectorCurrent - ( learningRate * nextGradientVector)\n    \n    println(\"xVectorNextIterate: \" + xVectorNextIterate)\n \n    var counter\u003d0\n    while (counter \u003c 110000) {\n        xVectorCurrent\u003dxVectorNextIterate\n//        xVectorCurrent\u003d new DenseVector(Array(x.x,x.y))\n//        nextGradient \u003d cFun(x)\n        nextGradient \u003d cFun(nextXYD(xVectorNextIterate(0),xVectorNextIterate(1)))\n        nextGradientVector \u003d new DenseVector(Array(nextGradient.x,nextGradient.y))\n//        println(\"nextGradient: \" + nextGradient.x+\" \"+nextGradient.y)\n//        hessian \u003d cHess(x)\n//        println(\"Hessian: \"+hessian.a+\" \"+hessian.b+\" \"+hessian.c+\" \"+hessian.d)\n//        hessianMatrix \u003d new DenseMatrix(2,2,Array(hessian.a,hessian.b,hessian.c,hessian.d))\n//        hessianGradient \u003dhessianMatrix*nextGradientVector\n//        println(\"Hessian*Gradient: \" + hessianGradient)\n//        xVectorNextIterate \u003d xVectorCurrent - hessianGradient \n         xVectorNextIterate \u003d xVectorCurrent -  (learningRate * nextGradientVector)\n\n        println(\"xVectorNextIterate: \" + xVectorNextIterate)\n        counter \u003d counter +1\n    }\n}  //  End of SteepestDescent method \n\ndef polyEvaluate(fPL:List[pcTrms])(xY:nextXYD): graphArgsD \u003d {      \n    var result \u003d new BigDecimal(\"0\")\n    for (terms \u003c- fPL)\n     {\n      val s1 \u003d new BigDecimal(terms.sca1)\n      val deg1 \u003d terms.deg1.toInt\n      val div1 \u003d new BigDecimal(terms.div1)\n      val x \u003d new BigDecimal(xY.x)\n\n      val s2 \u003d new BigDecimal(terms.sca2)\n      val deg2 \u003d terms.deg2.toInt\n      val div2 \u003d new BigDecimal(terms.div2)  \n      val y \u003d new BigDecimal(xY.y) \n\n      val d1R\u003dx.pow(deg1)\n      val s1R\u003ds1.multiply(d1R)\n\n      val d2R\u003dy.pow(deg2)\n      val s2R\u003ds2.multiply(d2R)\n\n      val divRes\u003ddiv1.multiply(div2)\n      val res\u003ds1R.multiply(s2R).divide(divRes)\n\n      result\u003dresult.add(res)\n//    println(\"res: \"+res.toString())\n//    println(\"Result: \"+ result.toString)  \n//    println(\"s1 \"+\" \"+ s1+\" deg1 \"+\" \"+ deg1+\" div1 \"+\" \"+ div1+\" s2 \"+\" \"+ s2+\" deg2 \"+\" \"+ deg2+\" div2\"+\" \"+ div2+\" \"+x+\" \"+x.toString()+\" \"+\" y \"+\" \"+y.toString())\n\n     }\n      val s\u003d graphArgsD(xY.x,xY.y,result.doubleValue())\n //     println(\"End polyEvaluate result\"+\" \"+result.toString())\n     s\n}\n\ndef evalGradient(xF:(nextXYD)\u003d\u003egraphArgsD,yF:(nextXYD)\u003d\u003egraphArgsD)(xY:nextXYD): nextXYD \u003d {      \n    val polyE\u003dnextXYD(xF(xY).result,yF(xY).result)\n//    println(\"evalGradient x,y: \"+ polyE.x+\" \"+polyE.y)\n    polyE\n}\n\ndef evalHessian(aF:(nextXYD)\u003d\u003egraphArgsD,bF:(nextXYD)\u003d\u003egraphArgsD,cF:(nextXYD)\u003d\u003egraphArgsD,dF:(nextXYD)\u003d\u003egraphArgsD)(xY:nextXYD): hess \u003d {     \n    val a\u003daF(xY).result;val b\u003dbF(xY).result;val c\u003dcF(xY).result;val d\u003ddF(xY).result;\n    val det\u003d 1/((a*d)-(b*c))\n//    println(\"evalHessian det:\"+ det)\n//    println(\"evalHessian \"+a+\" \"+b+\" \"+c+\" \"+d)\n    val polyE\u003dhess( d*det,-b*det,-c*det,a*det)      \n    polyE\n}\n\n\ndef evalHessian1(aF:(nextXYD)\u003d\u003egraphArgsD,bF:(nextXYD)\u003d\u003egraphArgsD,cF:(nextXYD)\u003d\u003egraphArgsD,dF:(nextXYD)\u003d\u003egraphArgsD)(xY:nextXYD): hess \u003d {     \n    val a\u003daF(xY).result;val b\u003dbF(xY).result;val c\u003dcF(xY).result;val d\u003ddF(xY).result;\n    val det\u003d 1/((a*d)-(b*c))\n    println(\"EvalHessian1 \"+a+\" \"+b+\" \"+c+\" \"+d)\n    val polyE\u003dhess(a,b,c,d)      \n    polyE\n}\n\n//case class graphArgsD(x:Double,y:Double,result:Double)\n//case class nextXYD(x:Double,y:Double)\n//case class hess(a:Double,b:Double,c:Double,d:Double)\n\ndef main(args:Array[String]) {\n     val tolerance \u003d 0.0000001\n     val learningRate \u003d 0.000000001\n     val nxy\u003dnextXYD(7.0,14.31059)\n     val p1DF\u003d z.get(args(0)).asInstanceOf[DataFrame]\n //    p1DF.show()\n      val fEval \u003dp1DF.map(row \u003d\u003e pcTrms(row.getString(0), row.getString(1), row.getString(2), row.getString(10), row.getString(11), row.getString(12), row.getString(3), row.getString(13))).collect.toList\n     def evFun \u003d polyEvaluate(fEval)_\n //    println(\"eFun 14,6: \"+evFun(nxy))\n //    println(\"eFun 14,4: \"+evFun(nextXYD(14,4)))  \n \n \n \n \n     val fOfdX \u003dp1DF.map(row \u003d\u003e pcTrms(row.getString(6), row.getString(7), row.getString(2), row.getString(10), row.getString(11), row.getString(12), row.getString(3), row.getString(13))).collect.toList\n     val fOfdY \u003dp1DF.map(row \u003d\u003e pcTrms(row.getString(0), row.getString(1), row.getString(2), row.getString(16), row.getString(17), row.getString(12), row.getString(3), row.getString(13))).collect.toList \n     def evGrad\u003devalGradient(polyEvaluate(fOfdX)_,polyEvaluate(fOfdY)_)_\n     val e\u003devGrad(nxy)              \n     println(\"evalGradientReturn \"+e.x+\" \"+e.y)\n\n\n\n\n     val fA \u003dp1DF.map(row \u003d\u003e pcTrms(row.getString(8), row.getString(9), row.getString(2), row.getString(10), row.getString(11), row.getString(12), row.getString(3), row.getString(13))).collect.toList\n     val fB \u003dp1DF.map(row \u003d\u003e pcTrms(row.getString(6), row.getString(7), row.getString(2), row.getString(16), row.getString(17), row.getString(12), row.getString(3), row.getString(13))).collect.toList\n     val fC \u003dp1DF.map(row \u003d\u003e pcTrms(row.getString(6), row.getString(7), row.getString(2), row.getString(16), row.getString(17), row.getString(12), row.getString(3), row.getString(13))).collect.toList\n     val fD \u003dp1DF.map(row \u003d\u003e pcTrms(row.getString(0), row.getString(1), row.getString(2), row.getString(18), row.getString(19), row.getString(12), row.getString(3), row.getString(13))).collect.toList      \n     def evHess\u003devalHessian(polyEvaluate(fA)_,polyEvaluate(fB)_,polyEvaluate(fC)_,polyEvaluate(fD)_)_     \n     def evHess1\u003devalHessian1(polyEvaluate(fA)_,polyEvaluate(fB)_,polyEvaluate(fC)_,polyEvaluate(fD)_)_  // test for correct inverse,, not production method.\n\n//println(\"fa: \"+ fA)\n//println(\"fb: \"+ fB)\n//println(\"fc: \"+ fC)\n//println(\"fd: \"+ fD)\n\n     steepestDescent(nxy, learningRate, tolerance,evHess ,evGrad)\n\n  }\n}\n\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-03-04 13:20:57.584",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "defined object GDescent\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1646155334665_-1199629768",
+      "id": "20220214-141744_1265540270",
+      "dateCreated": "2022-03-01 12:22:14.665",
+      "dateStarted": "2022-03-04 13:20:58.064",
+      "dateFinished": "2022-03-04 13:20:58.527",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%spark\nGDescent.main(Array(\"dPX\",\"dPY\"))",
+      "user": "anonymous",
+      "dateUpdated": "2022-03-11 09:14:21.775",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "ERROR",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "scala.reflect.internal.MissingRequirementError: object java.lang.Object in compiler mirror not found.\r\n\tat scala.reflect.internal.MissingRequirementError$.signal(MissingRequirementError.scala:17)\r\n\tat scala.reflect.internal.MissingRequirementError$.notFound(MissingRequirementError.scala:18)\r\n\tat scala.reflect.internal.Mirrors$RootsBase.getModuleOrClass(Mirrors.scala:53)\r\n\tat scala.reflect.internal.Mirrors$RootsBase.getModuleOrClass(Mirrors.scala:45)\r\n\tat scala.reflect.internal.Mirrors$RootsBase.getModuleOrClass(Mirrors.scala:45)\r\n\tat scala.reflect.internal.Mirrors$RootsBase.getModuleOrClass(Mirrors.scala:66)\r\n\tat scala.reflect.internal.Mirrors$RootsBase.getClassByName(Mirrors.scala:102)\r\n\tat scala.reflect.internal.Mirrors$RootsBase.getRequiredClass(Mirrors.scala:105)\r\n\tat scala.reflect.internal.Definitions$DefinitionsClass.ObjectClass$lzycompute(Definitions.scala:257)\r\n\tat scala.reflect.internal.Definitions$DefinitionsClass.ObjectClass(Definitions.scala:257)\r\n\tat scala.reflect.internal.Definitions$DefinitionsClass.init(Definitions.scala:1394)\r\n\tat scala.tools.nsc.Global$Run.\u003cinit\u003e(Global.scala:1215)\r\n\tat scala.tools.nsc.interpreter.IMain.compileSourcesKeepingRun(IMain.scala:432)\r\n\tat scala.tools.nsc.interpreter.IMain$ReadEvalPrint.compileAndSaveRun(IMain.scala:855)\r\n\tat scala.tools.nsc.interpreter.IMain$ReadEvalPrint.compile(IMain.scala:813)\r\n\tat scala.tools.nsc.interpreter.IMain.bind(IMain.scala:675)\r\n\tat scala.tools.nsc.interpreter.IMain.bind(IMain.scala:712)\r\n\tat scala.tools.nsc.interpreter.IMain$$anonfun$quietBind$1.apply(IMain.scala:711)\r\n\tat scala.tools.nsc.interpreter.IMain$$anonfun$quietBind$1.apply(IMain.scala:711)\r\n\tat scala.tools.nsc.interpreter.IMain.beQuietDuring(IMain.scala:214)\r\n\tat scala.tools.nsc.interpreter.IMain.quietBind(IMain.scala:711)\r\n\tat org.apache.zeppelin.spark.SparkScala211Interpreter$.loopPostInit$1(SparkScala211Interpreter.scala:142)\r\n\tat org.apache.zeppelin.spark.SparkScala211Interpreter$.org$apache$zeppelin$spark$SparkScala211Interpreter$$loopPostInit(SparkScala211Interpreter.scala:177)\r\n\tat org.apache.zeppelin.spark.SparkScala211Interpreter.open(SparkScala211Interpreter.scala:87)\r\n\tat org.apache.zeppelin.spark.NewSparkInterpreter.open(NewSparkInterpreter.java:102)\r\n\tat org.apache.zeppelin.spark.SparkInterpreter.open(SparkInterpreter.java:62)\r\n\tat org.apache.zeppelin.interpreter.LazyOpenInterpreter.open(LazyOpenInterpreter.java:69)\r\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreterServer$InterpretJob.jobRun(RemoteInterpreterServer.java:616)\r\n\tat org.apache.zeppelin.scheduler.Job.run(Job.java:188)\r\n\tat org.apache.zeppelin.scheduler.FIFOScheduler$1.run(FIFOScheduler.java:140)\r\n\tat java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)\r\n\tat java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)\r\n\tat java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:304)\r\n\tat java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)\r\n\tat java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)\r\n\tat java.base/java.lang.Thread.run(Thread.java:834)\r\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1646155334665_1331795443",
+      "id": "20220214-141743_475885662",
+      "dateCreated": "2022-03-01 12:22:14.665",
+      "dateStarted": "2022-03-11 09:14:21.844",
+      "dateFinished": "2022-03-11 09:14:22.130",
+      "status": "ERROR",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%spark\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-03-01 12:22:14.665",
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1646155334665_1780184329",
+      "id": "20220209-101037_2024029554",
+      "dateCreated": "2022-03-01 12:22:14.665",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "user": "anonymous",
+      "dateUpdated": "2022-03-01 12:22:14.665",
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1646155334665_1931884294",
+      "id": "20220218-155243_1642515396",
+      "dateCreated": "2022-03-01 12:22:14.665",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    }
+  ],
+  "name": "GraphicMultiVarPDQuartetsForPlot 1",
+  "id": "2GXTHE9EN",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {
+    "md:shared_process": [],
+    "angular:shared_process": [],
+    "neo4j:shared_process": [],
+    "spark:shared_process": []
+  },
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {}
+}
