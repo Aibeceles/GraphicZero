@@ -5,6 +5,9 @@ The GraphicZero folder contains the following:
 ProjectIntroductionVideo:
 https://www.youtube.com/watch?v=FqSzCCxxdVY&t=9s
 
+Project submission page:
+https://neo4j.com/blog/global-graphhack-projects-help-us-pick-winners/
+
 **.** AbridgedMathsofQuadraticAddition.pdf is an abridged introduction to the math.
 
 **.** TwoPolynomial092319.csv data for populating graphdb.
